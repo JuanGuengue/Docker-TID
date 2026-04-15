@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  airflow-worker:
+    image: apache/airflow:3.2.0
+    command: celery worker
+    env_file:
+      - ../.env
+    volumes:
+      - ../airflow/dags:/opt/airflow/dags
+      - ../airflow/logs:/opt/airflow/logs
+      - ../airflow/plugins:/opt/airflow/plugins
+    restart: always
